@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 2 - Flutter Lab</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="top-header">
+
+    <!-- Home Button -->
+    <a href="../index.html" class="home-btn">← Home</a>
+
+    <div class="hero">
+        <h1>Week 2: System Setup & Dart Basics</h1>
+        <p>Flutter Lab Programs • Code • Output Screens</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Week Description -->
+    <section class="info-card">
+        <h2>Week 2: System Setup, IDE Installation & Basic Dart Programs</h2>
+        <div class="section-divider"></div>
+        <p><strong>Description:</strong> System Setup, IDE Installation and running basic Dart programs.</p>
+    </section>
+
+    <!-- Program + Output Grid -->
+    <section class="program-grid">
+
+        <!-- Program Card -->
+        <div class="program-card">
+            <h3>Task: Run a Basic Dart Program</h3>
+            <p>Copy and execute the following code using <code>dart hello.dart</code>:</p>
+
+<pre><code>
+void main() {
+  int age = 20;
+  double height = 5.3;
+  String name = 'PREETHI VINNAKOTA';
+  bool isStudent = true;
+
+  print('Name: $name');
+  print('Age: $age');
+  print('Height: $height');
+  print('Is a student: $isStudent');
+
+  if (age > 18) {
+    print('$name is an adult.');
+  } else {
+    print('$name is a minor.');
+  }
+
+  print('Counting from 1 to 5:');
+  for (int i = 1; i <= 5; i++) {
+    print(i);
+  }
+
+  greet(name);
+}
+
+void greet(String personName) {
+  print('Hello, $personName! Welcome to Dart.');
+}
+</code></pre>
+        </div>
+
+        <!-- Output Card -->
+        <div class="program-card output-card">
+            <h3>Output</h3>
+            <img src="../images/week2_output.png" alt="Week 2 Output" class="output-img">
+        </div>
+
+    </section>
+
+    <!-- Navigation Buttons -->
+    <section class="week-navigation">
+        <div class="nav-buttons">
+            <button onclick="location.href='week1.html'" class="week-btn prev-btn">
+                ← Previous Week
+            </button>
+
+            <button onclick="location.href='week3.html'" class="week-btn next-btn">
+                Next Week →
+            </button>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    USER INTERFACE DESIGN USING FLUTTER
+</footer>
+
+</body>
+</html>

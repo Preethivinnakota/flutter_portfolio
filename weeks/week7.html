@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 7 - Flutter Lab</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="top-header">
+  <a href="../index.html" class="home-btn">
+    ← Home
+</a>
+
+    <div class="hero">
+        <h1>Week 7: Custom Widgets</h1>
+        <p>Flutter Lab Programs • Code • Output Screens</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Week Description -->
+    <section class="info-card">
+        <h2>Week 7: Custom Widgets</h2>
+        <div class="section-divider"></div>
+        <p><strong>Description:</strong> Creating and styling custom widgets and adding animations to enhance UX.</p>
+    </section>
+
+    <!-- Task 1 -->
+    <section class="question-card">
+        <h3>Task 1: Reusable Custom Button Widget</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+
+      import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: HomeScreen());
+  }
+}
+
+/// 🔹 Reusable Button Widget
+class CustomButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+
+  const CustomButton({super.key, required this.text, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(text),
+    );
+  }
+}
+
+/// 🔹 Using the Reusable Button
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Simple Reusable Widget")),
+      body: Center(
+        child: CustomButton(
+          text: "Click Me",
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Button Pressed!")),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+              </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 1</h2>
+        <img src="../images/week7_output.png" alt="Week 7 Output 1" class="output-img">
+    </section>
+
+    <!-- Task 2 -->
+    <section class="question-card">
+        <h3>Task 2: App Theme & Themed Button</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+
+      import 'package:flutter/material.dart';
+void main() => runApp(MyApp());
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Theme Example",
+      theme: ThemeData(
+        primarySwatch: Colors.blue,        // App primary color
+        scaffoldBackgroundColor: Colors.grey[200], // Background color
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          bodyMedium: TextStyle(fontSize: 16, color: Colors.black87),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue,
+            foregroundColor: Colors.white,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+        ),
+      ),
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("App Theme Demo")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Hello Flutter!", style: Theme.of(context).textTheme.bodyLarge),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text("Themed Button"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+              </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 2</h2>
+        <img src="../images/week7_output_2.png" alt="Week 7 Output 2" class="output-img">
+    </section>
+
+    <!-- Task 3 -->
+    <section class="question-card">
+        <h3>Task 3: All Animation Classes Demo</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+
+      import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(home: AllAnimationsDemo());
+  }
+}
+
+class AllAnimationsDemo extends StatefulWidget {
+  @override
+  _AllAnimationsDemoState createState() => _AllAnimationsDemoState();
+}
+
+class _AllAnimationsDemoState extends State<AllAnimationsDemo> {
+  bool _visible = true;
+  bool _slided = false;
+  double _scale = 1.0;
+  double _rotation = 0.0;
+  double _position = 0.0;
+  double _boxSize = 100;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("All Animation Classes")),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            SizedBox(height: 20),
+
+            // 🔹 1. Fade (AnimatedOpacity)
+            AnimatedOpacity(
+              opacity: _visible ? 1.0 : 0.0,
+              duration: Duration(seconds: 1),
+              child: Text("Fade Animation", style: TextStyle(fontSize: 20)),
+            ),
+
+            SizedBox(height: 20),
+
+            // 🔹 2. Slide (AnimatedSlide)
+            AnimatedSlide(
+              offset: _slided ? Offset(1, 0) : Offset(0, 0),
+              duration: Duration(seconds: 1),
+              child: Container(
+                color: Colors.blue,
+                padding: EdgeInsets.all(12),
+                child: Text("Slide Animation", style: TextStyle(color: Colors.white)),
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            // 🔹 3. Scale (AnimatedScale)
+            AnimatedScale(
+              scale: _scale,
+              duration: Duration(seconds: 1),
+              child: Icon(Icons.star, size: 60, color: Colors.orange),
+            ),
+
+            SizedBox(height: 20),
+
+            // 🔹 4. Rotation (AnimatedRotation)
+            AnimatedRotation(
+              turns: _rotation,
+              duration: Duration(seconds: 1),
+              child: Icon(Icons.refresh, size: 60, color: Colors.green),
+            ),
+
+            SizedBox(height: 20),
+
+            // 🔹 5. Position (AnimatedPositioned) inside Stack
+            Container(
+              height: 120,
+              color: Colors.grey[300],
+              child: Stack(
+                children: [
+                  AnimatedPositioned(
+                    duration: Duration(seconds: 1),
+                    left: _position,
+                    top: 30,
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      color: Colors.purple,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            // 🔹 6. Container (AnimatedContainer)
+            AnimatedContainer(
+              duration: Duration(seconds: 1),
+              curve: Curves.easeInOut,
+              width: _boxSize,
+              height: _boxSize,
+              color: Colors.red,
+            ),
+
+            SizedBox(height: 30),
+
+            // 🔹 Buttons to trigger animations
+            Wrap(
+              spacing: 10,
+              children: [
+                ElevatedButton(onPressed: () => setState(() => _visible = !_visible), child: Text("Fade")),
+                ElevatedButton(onPressed: () => setState(() => _slided = !_slided), child: Text("Slide")),
+                ElevatedButton(onPressed: () => setState(() => _scale = _scale == 1.0 ? 1.5 : 1.0), child: Text("Scale")),
+                ElevatedButton(onPressed: () => setState(() => _rotation += 0.25), child: Text("Rotate")),
+                ElevatedButton(onPressed: () => setState(() => _position = _position == 0 ? 200 : 0), child: Text("Move")),
+                ElevatedButton(onPressed: () => setState(() => _boxSize = _boxSize == 100 ? 150 : 100), child: Text("Resize")),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+              </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 3</h2>
+        <img src="../images/week7_output_3.png" alt="Week 7 Output 3" class="output-img">
+    </section>
+
+    
+<!-- Navigation Buttons -->
+<section class="week-navigation">
+    <div class="nav-buttons">
+        <!-- Previous Week Button -->
+        <button onclick="location.href='week6.html'" class="week-btn prev-btn">← Previous Week</button>
+
+        <!-- Next Week Button -->
+        <button onclick="location.href='week8.html'" class="week-btn next-btn">Next Week →</button>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    USER INTERFACE DESIGN USING FLUTTER
+</footer>
+
+</body>
+</html>

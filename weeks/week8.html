@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 8 - Flutter Lab</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="top-header">
+  <a href="../index.html" class="home-btn">
+    ← Home
+</a>
+
+    <div class="hero">
+        <h1>Week 8: Login Screen and Profile Card</h1>
+        <p>Flutter Lab Programs • Code • Output Screens</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Week Description -->
+    <section class="info-card">
+        <h2>Week 8: Login Screen and Profile Card</h2>
+        <div class="section-divider"></div>
+        <p><strong>Description:</strong> Creating a simple login page with validations and Designing a profile card.</p>
+    </section>
+
+    <!-- Task 1 -->
+    <section class="question-card">
+        <h3>Task 1: Simple Login Screen with Validation</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+
+      import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SimpleLoginScreen(),
+    );
+  }
+}
+
+class SimpleLoginScreen extends StatefulWidget {
+  const SimpleLoginScreen({super.key});
+
+  @override
+  State<SimpleLoginScreen> createState() => _SimpleLoginScreenState();
+}
+
+class _SimpleLoginScreenState extends State<SimpleLoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  void _login() {
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Logging in...')),
+      );
+    }
+  }
+
+  String? _validateEmail(String? value) {
+    if (value == null || value.isEmpty) return 'Please enter your email';
+    final emailRegex = RegExp(r'^[^@]+@[^@]+.[^@]+');
+    if (!emailRegex.hasMatch(value)) return 'Enter a valid email';
+    return null;
+  }
+
+  String? _validatePassword(String? value) {
+    if (value == null || value.isEmpty) return 'Please enter your password';
+    if (value.length < 6) return 'Password must be at least 6 characters';
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Login')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                ),
+                validator: _validateEmail,
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+                validator: _validatePassword,
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: _login,
+                child: const Text('Login'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+              </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 1</h2>
+        <img src="../images/week8_output.png" alt="Week 8 Output 1" class="output-img">
+    </section>
+
+    <!-- Task 2 -->
+    <section class="question-card">
+        <h3>Task 2: Profile Card Design</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+
+     import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Profile Card Demo',
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Profile Card Example'),
+        ),
+        body: const ProfileCard(
+          name: 'Preethi Vinnakota',
+          email: 'preethivinnakota@gmail.com',
+          avatarUrl: '', // Empty means default avatar icon shown
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileCard extends StatelessWidget {
+  final String name;
+  final String email;
+  final String avatarUrl;
+
+  const ProfileCard({
+    Key? key,
+    required this.name,
+    required this.email,
+    required this.avatarUrl,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.all(16),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 40,
+                backgroundColor: Colors.grey[200] ?? Colors.grey,
+                backgroundImage:
+                    avatarUrl.isNotEmpty ? NetworkImage(avatarUrl) : null,
+                child: avatarUrl.isEmpty
+                    ? const Icon(
+                        Icons.person,
+                        size: 40,
+                        color: Colors.grey,
+                      )
+                    : null,
+              ),
+              const SizedBox(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    email,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[700] ?? Colors.grey,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+              </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 2</h2>
+        <img src="../images/week8_output_2.png" alt="Week 8 Output 2" class="output-img">
+    </section>
+
+    
+<!-- Navigation Buttons -->
+<section class="week-navigation">
+    <div class="nav-buttons">
+        <!-- Previous Week Button -->
+        <button onclick="location.href='week7.html'" class="week-btn prev-btn">← Previous Week</button>
+
+        <!-- Next Week Button -->
+        <button onclick="location.href='week9.html'" class="week-btn next-btn">Next Week →</button>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    USER INTERFACE DESIGN USING FLUTTER
+</footer>
+
+</body>
+</html>

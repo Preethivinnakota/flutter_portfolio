@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 5 - Flutter Lab</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="top-header">
+  <a href="../index.html" class="home-btn">
+    ← Home
+</a>
+
+    <div class="hero">
+        <h1>Week 5: MediaQuery & Layout Breakpoints</h1>
+        <p>Flutter Lab Programs • Code • Output Screens</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Week Description -->
+    <section class="info-card">
+        <h2>Week 5: Responsive UI with MediaQuery</h2>
+        <div class="section-divider"></div>
+        <p><strong>Description:</strong> Using MediaQuery and layout breakpoints to implement responsiveness in different screen sizes and device orientations.</p>
+    </section>
+
+    <!-- Task 1 -->
+    <section class="question-card">
+        <h3>Task 1: Orientation Based Layout</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: const ResponsiveExample(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class ResponsiveExample extends StatelessWidget {
+  const ResponsiveExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Check orientation
+    final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("Simple Responsive UI")),
+      body: isPortrait
+          ? Column(
+              children: [
+                Expanded(child: Container(color: Colors.blue, child: const Center(child: Text("Top Section")))),
+                Expanded(child: Container(color: Colors.green, child: const Center(child: Text("Bottom Section")))),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(child: Container(color: Colors.blue, child: const Center(child: Text("Left Section")))),
+                Expanded(child: Container(color: Colors.green, child: const Center(child: Text("Right Section")))),
+              ],
+            ),
+    );
+  }
+}
+        </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 1</h2>
+        <img src="../images/week5_output.png" alt="Week 5 Output 1" class="output-img">
+    </section>
+
+    <!-- Task 2 -->
+    <section class="question-card">
+        <h3>Task 2: Width Based Layout Breakpoints</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ResponsiveExample(),
+    );
+  }
+}
+
+class ResponsiveExample extends StatelessWidget {
+  const ResponsiveExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // breakpoint: <600 = mobile, >=600 = tablet/desktop
+    final isMobile = screenWidth < 600;
+
+    return Scaffold(
+      appBar: AppBar(title: const Text("Simple Responsive UI")),
+      body: isMobile
+          ? Column(
+              children: [
+                Expanded(child: Container(color: Colors.blue, child: const Center(child: Text("Mobile - Top")))),
+                Expanded(child: Container(color: Colors.green, child: const Center(child: Text("Mobile - Bottom")))),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(child: Container(color: Colors.blue, child: const Center(child: Text("Tablet/Desktop - Left")))),
+                Expanded(child: Container(color: Colors.green, child: const Center(child: Text("Tablet/Desktop - Right")))),
+              ],
+            ),
+    );
+  }
+}
+        </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 2</h2>
+        <img src="../images/week5_output_2.png" alt="Week 5 Output 2" class="output-img">
+    </section>
+<!-- Navigation Buttons -->
+<section class="week-navigation">
+    <div class="nav-buttons">
+        <!-- Previous Week Button -->
+        <button onclick="location.href='week4.html'" class="week-btn prev-btn">← Previous Week</button>
+
+        <!-- Next Week Button -->
+        <button onclick="location.href='week6.html'" class="week-btn next-btn">Next Week →</button>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    USER INTERFACE DESIGN USING FLUTTER
+</footer>
+
+</body>
+</html>

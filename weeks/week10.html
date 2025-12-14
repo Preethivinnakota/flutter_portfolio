@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 10 - Flutter Lab</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="top-header">
+  <a href="../index.html" class="home-btn">
+    ← Home
+</a>
+
+    <div class="hero">
+        <h1>Week 10: List and Grid View</h1>
+        <p>Flutter Lab Programs • Code • Output Screens</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Week Description -->
+    <section class="info-card">
+        <h2>Week 10: List and Grid View</h2>
+        <div class="section-divider"></div>
+        <p><strong>Description:</strong> Parse the response and display the data in a structured UI format - ListView or GridView.</p>
+    </section>
+
+    <!-- Task 1: ListView -->
+    <section class="question-card">
+        <h3>Task 1: Display Data in ListView</h3>
+        <pre><code>
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+
+      import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Fetch API Demo',
+      home: FetchApiDemo(),
+    );
+  }
+}
+
+class FetchApiDemo extends StatefulWidget {
+  @override
+  _FetchApiDemoState createState() => _FetchApiDemoState();
+}
+
+class _FetchApiDemoState extends State<FetchApiDemo> {
+  List<dynamic> users = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUsers();
+  }
+
+  // Function to fetch data from public REST API
+  Future<void> fetchUsers() async {
+    final url = Uri.parse('https://jsonplaceholder.typicode.com/users');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      setState(() {
+        users = jsonDecode(response.body);
+      });
+    } else {
+      throw Exception("Failed to load data");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Fetch Data from REST API"),
+        backgroundColor: Colors.teal,
+      ),
+      body: users.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (context, index) {
+                final user = users[index];
+                return Card(
+                  margin: const EdgeInsets.all(8),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      child: Text(user['name'][0]),
+                    ),
+                    title: Text(user['name']),
+                    subtitle: Text(user['email']),
+                    trailing: Text(user['id'].toString()),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+}
+              </code></pre>
+    </section>
+
+    <!-- Output 1 -->
+    <section class="output-section">
+        <h2>Output 1</h2>
+        <img src="../images/week10_output.png" alt="Week 10 Output 1" class="output-img">
+    </section>
+
+    <!-- Task 2: GridView -->
+    <section class="question-card">
+        <h3>Task 2: Display Data in GridView</h3>
+        <pre><code>
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+
+      import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'GridView API Demo',
+      home: GridViewApiDemo(),
+    );
+  }
+}
+
+class GridViewApiDemo extends StatefulWidget {
+  @override
+  _GridViewApiDemoState createState() => _GridViewApiDemoState();
+}
+
+class _GridViewApiDemoState extends State<GridViewApiDemo> {
+  List<dynamic> users = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUsers();
+  }
+
+  // Function to fetch data from REST API
+  Future<void> fetchUsers() async {
+    final url = Uri.parse('https://jsonplaceholder.typicode.com/users');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      setState(() {
+        users = jsonDecode(response.body);
+      });
+    } else {
+      throw Exception("Failed to load data");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Fetch Data - GridView"),
+        backgroundColor: Colors.deepPurple,
+      ),
+      body: users.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : GridView.builder(
+              padding: const EdgeInsets.all(10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Number of columns
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 3 / 2,
+              ),
+              itemCount: users.length,
+              itemBuilder: (context, index) {
+                final user = users[index];
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade100,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        user['name'],
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        user['email'],
+                        style: const TextStyle(fontSize: 12),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+    );
+  }
+}
+
+              </code></pre>
+    </section>
+
+    <!-- Output 2 -->
+    <section class="output-section">
+        <h2>Output 2</h2>
+        <img src="../images/week10_output_2.png" alt="Week 10 Output 2" class="output-img">
+    </section>
+
+    <!-- Navigation Buttons -->
+     <!-- Previous Week Button -->
+        <button onclick="location.href='week8.html'" class="week-btn prev-btn">← Previous Week</button>
+
+    </section>
+
+</main>
+
+<footer>
+    USER INTERFACE DESIGN USING FLUTTER
+</footer>
+
+</body>
+</html>

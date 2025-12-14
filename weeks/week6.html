@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 6 - Flutter Lab</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="top-header">
+  <a href="../index.html" class="home-btn">
+    ← Home
+</a>
+
+    <div class="hero">
+        <h1>Week 6: Navigation & Forms</h1>
+        <p>Flutter Lab Programs • Code • Output Screens</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Week Description -->
+    <section class="info-card">
+        <h2>Week 6: Navigation & Forms</h2>
+        <div class="section-divider"></div>
+        <p><strong>Description:</strong> Set up navigation between multiple screens using Navigator and designing Forms with input validation.</p>
+    </section>
+
+    <!-- Task 1 -->
+    <section class="question-card">
+        <h3>Task 1: Simple Navigation with Navigator</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+
+      import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Navigation Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Home Screen")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Navigate to Second Screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SecondScreen()),
+            );
+          },
+          child: const Text("Go to Second Screen"),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Second Screen")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            // Navigate back to Home Screen
+            Navigator.pop(context);
+          },
+          child: const Text("Back to Home Screen"),
+        ),
+      ),
+    );
+  }
+}
+              </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 1</h2>
+        <img src="../images/week6_output.png" alt="Week 6 Output 1" class="output-img">
+    </section>
+
+    <!-- Task 2 -->
+    <section class="question-card">
+        <h3>Task 2: Named Routes Navigation</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+
+      import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Named Routes Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      // Define named routes
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomeScreen(),
+        '/second': (context) => const SecondScreen(),
+        '/third': (context) => const ThirdScreen(),
+      },
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Home Screen")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/second');
+          },
+          child: const Text("Go to Second Screen"),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Second Screen")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/third');
+              },
+              child: const Text("Go to Third Screen"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Back to Home"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ThirdScreen extends StatelessWidget {
+  const ThirdScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Third Screen")),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text("Back to Second Screen"),
+        ),
+      ),
+    );
+  }
+}
+              </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 2</h2>
+        <img src="../images/week6_output_2.png" alt="Week 6 Output 2" class="output-img">
+    </section>
+
+    <!-- Task 3 -->
+    <section class="question-card">
+        <h3>Task 3: Forms & Basic Validation</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+
+      import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Form Example',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const FormScreen(),
+    );
+  }
+}
+
+class FormScreen extends StatefulWidget {
+  const FormScreen({super.key});
+
+  @override
+  State<FormScreen> createState() => _FormScreenState();
+}
+
+class _FormScreenState extends State<FormScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  // Form fields
+  String name = '';
+  String email = '';
+  String? gender;
+  bool termsAccepted = false;
+
+  final List<String> genders = ["Male", "Female", "Other"];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("User Form")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Name Field
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: "Name",
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) =>
+                    value == null || value.isEmpty ? "Enter your name" : null,
+                onSaved: (value) => name = value!,
+              ),
+              const SizedBox(height: 16),
+
+              // Email Field
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: "Email",
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) => (value == null || !value.contains("@"))
+                    ? "Enter a valid email"
+                    : null,
+                onSaved: (value) => email = value!,
+              ),
+              const SizedBox(height: 16),
+
+              // Dropdown
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  labelText: "Gender",
+                  border: OutlineInputBorder(),
+                ),
+                items: genders
+                    .map((g) =>
+                        DropdownMenuItem(value: g, child: Text(g)))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() => gender = value);
+                },
+                validator: (value) =>
+                    value == null ? "Please select gender" : null,
+              ),
+              const SizedBox(height: 16),
+
+              // Checkbox
+              Row(
+                children: [
+                  Checkbox(
+                    value: termsAccepted,
+                    onChanged: (value) {
+                      setState(() => termsAccepted = value!);
+                    },
+                  ),
+                  const Text("I accept the terms & conditions"),
+                ],
+              ),
+
+              // Submit Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate() && termsAccepted) {
+                      _formKey.currentState!.save();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              "Submitted: Name=$name, Email=$email, Gender=$gender"),
+                        ),
+                      );
+                    } else if (!termsAccepted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content:
+                                Text("Please accept terms & conditions")),
+                      );
+                    }
+                  },
+                  child: const Text("Submit"),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+              </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 3</h2>
+        <img src="../images/week6_output_3.png" alt="Week 6 Output 3" class="output-img">
+    </section>
+
+    <!-- Task 4 -->
+    <section class="question-card">
+        <h3>Task 4: Form Validation with AutovalidateMode</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+
+      import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Form Validation',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const FormScreen(),
+    );
+  }
+}
+
+class FormScreen extends StatefulWidget {
+  const FormScreen({super.key});
+
+  @override
+  State<FormScreen> createState() => _FormScreenState();
+}
+
+class _FormScreenState extends State<FormScreen> {
+  final _formKey = GlobalKey<FormState>();
+
+  // Form fields
+  String name = '';
+  String email = '';
+  String? gender;
+  bool termsAccepted = false;
+
+  final List<String> genders = ["Male", "Female", "Other"];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("User Form with Validation")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          autovalidateMode:
+              AutovalidateMode.onUserInteraction, // validate as user types
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Name Field
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: "Name",
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Please enter your name";
+                  }
+                  if (value.trim().length < 3) {
+                    return "Name must be at least 3 characters long";
+                  }
+                  return null;
+                },
+                onSaved: (value) => name = value!,
+              ),
+              const SizedBox(height: 16),
+
+              // Email Field
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: "Email",
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return "Please enter your email";
+                  }
+                  if (!RegExp(r'^[^@]+@[^@]+.[^@]+').hasMatch(value)) {
+                    return "Enter a valid email address";
+                  }
+                  return null;
+                },
+                onSaved: (value) => email = value!,
+              ),
+              const SizedBox(height: 16),
+
+              // Dropdown
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  labelText: "Gender",
+                  border: OutlineInputBorder(),
+                ),
+                items: genders
+                    .map((g) => DropdownMenuItem(value: g, child: Text(g)))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() => gender = value);
+                },
+                validator: (value) =>
+                    value == null ? "Please select your gender" : null,
+              ),
+              const SizedBox(height: 16),
+
+              // Checkbox with error message
+              FormField<bool>(
+                validator: (value) {
+                  if (!termsAccepted) {
+                    return "You must accept the terms & conditions";
+                  }
+                  return null;
+                },
+                builder: (formFieldState) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: termsAccepted,
+                            onChanged: (value) {
+                              setState(() {
+                                termsAccepted = value!;
+                                formFieldState.didChange(value);
+                              });
+                            },
+                          ),
+                          const Text("I accept the terms & conditions"),
+                        ],
+                      ),
+                      if (formFieldState.hasError)
+                        Text(
+                          formFieldState.errorText!,
+                          style: const TextStyle(color: Colors.red, fontSize: 12),
+                        )
+                    ],
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+
+              // Submit Button
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              "Form Submitted:
+Name=$name
+Email=$email
+Gender=$gender"),
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text("Submit"),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+              </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 4</h2>
+        <img src="../images/week6_output_4.png" alt="Week 6 Output 4" class="output-img">
+    </section>
+
+    
+<!-- Navigation Buttons -->
+<section class="week-navigation">
+    <div class="nav-buttons">
+        <!-- Previous Week Button -->
+        <button onclick="location.href='week5.html'" class="week-btn prev-btn">← Previous Week</button>
+
+        <!-- Next Week Button -->
+        <button onclick="location.href='week7.html'" class="week-btn next-btn">Next Week →</button>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    USER INTERFACE DESIGN USING FLUTTER
+</footer>
+
+</body>
+</html>

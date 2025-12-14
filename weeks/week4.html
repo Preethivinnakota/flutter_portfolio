@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 4 - Flutter Lab</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="top-header">
+  <a href="../index.html" class="home-btn">
+    ← Home
+</a>
+
+    <div class="hero">
+        <h1>Week 4: Layout Structures</h1>
+        <p>Flutter Lab Programs • Code • Output Screens</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Week Description -->
+    <section class="info-card">
+        <h2>Week 4: Implementing Rows, Columns & Stack Widgets</h2>
+        <div class="section-divider"></div>
+        <p><strong>Description:</strong> Implementing various layout structures using Rows, Column and Stack widgets in one application.</p>
+    </section>
+
+    <!-- Task 1 -->
+    <section class="question-card">
+        <h3>Task 1: Row Layout Example</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+// Entry point of the app
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Row Layout Example',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: RowExample(),
+    );
+  }
+}
+
+// Row Layout Example
+class RowExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Row Layout Example"), centerTitle: true),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Icon(Icons.home, size: 60, color: Colors.blue),
+            Icon(Icons.star, size: 60, color: Colors.orange),
+            Icon(Icons.settings, size: 60, color: Colors.green),
+          ],
+        ),
+      ),
+    );
+  }
+}
+        </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 1</h2>
+        <img src="../images/week4_output.png" alt="Week 4 Output 1" class="output-img">
+    </section>
+
+    <!-- Task 2 -->
+    <section class="question-card">
+        <h3>Task 2: Column Layout Example</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+// Entry point of the app
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Column Layout Example',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: ColumnExample(),
+    );
+  }
+}
+
+// Column Layout Example
+class ColumnExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Column Layout Example"), centerTitle: true),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text("Flutter",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            ElevatedButton(onPressed: () {}, child: Text("Click Me")),
+            Icon(Icons.thumb_up, size: 60, color: Colors.purple),
+          ],
+        ),
+      ),
+    );
+  }
+}
+        </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 2</h2>
+        <img src="../images/week4_output_2.png" alt="Week 4 Output 2" class="output-img">
+    </section>
+
+    <!-- Task 3 -->
+    <section class="question-card">
+        <h3>Task 3: Stack Layout Example</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+// Entry point of the app
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Stack Layout Example',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: StackExample(),
+    );
+  }
+}
+
+// Stack Layout Example
+class StackExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Stack Layout Example"), centerTitle: true),
+      body: Center(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(width: 200, height: 200, color: Colors.blue),
+            Container(width: 150, height: 150, color: Colors.red),
+            Container(width: 100, height: 100, color: Colors.green),
+            Text(
+              "Stacked",
+              style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+        </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 3</h2>
+        <img src="../images/week4_output_3.png" alt="Week 4 Output 3" class="output-img">
+    </section>
+
+    <!-- Task 4 -->
+    <section class="question-card">
+        <h3>Task 4: Combined Row, Column & Stack Demo</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Row, Column & Stack Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: HomeScreen(),
+    );
+  }
+}
+
+// Home Screen
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Flutter Layouts")),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              child: Text("Row Layout"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RowExample()),
+                );
+              },
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              child: Text("Column Layout"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ColumnExample()),
+                );
+              },
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              child: Text("Stack Layout"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => StackExample()),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+        </code></pre>
+    </section>
+    <section class="output-section">
+        <h2>Output 4</h2>
+        <img src="../images/week4_output_4.png" alt="Week 4 Output 4" class="output-img">
+    </section>
+
+    
+
+</main>
+<!-- Navigation Buttons -->
+<section class="week-navigation">
+    <div class="nav-buttons">
+        <!-- Previous Week Button -->
+        <button onclick="location.href='week3.html'" class="week-btn prev-btn">← Previous Week</button>
+
+        <!-- Next Week Button -->
+        <button onclick="location.href='week5.html'" class="week-btn next-btn">Next Week →</button>
+    </div>
+</section>
+
+<footer>
+    USER INTERFACE DESIGN USING FLUTTER
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flutter Lab Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top-header">
+    <div class="hero">
+        <h1>Flutter Lab Portfolio</h1>
+        <p>Weekly Programs • Code • Output Screens</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Student Information -->
+    <section class="info-card">
+        <div class="profile">
+            <div class="avatar">P</div>
+
+            <div class="details">
+                <p><strong>Name:</strong> PREETHI VINNAKOTA</p>
+                <p><strong>Roll No:</strong>238W1A1264</p>
+                <p><strong>Course:</strong> INFORMATION TECHNOLOGY</p>
+                <p><strong>Semester:</strong> V</p>
+                <p><strong>Subject:</strong> USER INTERFACE DESIGN USING FLUTTER </p>
+                <p><strong>College:</strong> VRSEC</p>
+            </div>
+        </div>
+    </section>
+    <!-- Overview Section -->
+<section class="overview">
+    <div class="overview-card">
+        <h3>Total Weeks</h3>
+        <p>10</p>
+    </div>
+
+    <div class="overview-card">
+        <h3>Technology</h3>
+        <p>Flutter & Dart</p>
+    </div>
+
+    <div class="overview-card">
+        <h3>Purpose</h3>
+        <p>Academic Lab Portfolio</p>
+    </div>
+</section>
+<!-- About Portfolio -->
+<section class="about-card">
+    <h2>About This Portfolio</h2>
+    <p>
+        This website presents the weekly laboratory programs completed as part of
+        the <strong>User Interface Design Using Flutter</strong> course.
+        Each week contains program code along with the corresponding output
+        screenshots for evaluation and reference.
+    </p>
+</section>
+
+
+    <div class="weeks-grid">
+    <!-- Week 1 -->
+    <a href="weeks/week1.html" class="week-box">
+        <span>Week 01</span>
+        <h3>Flutter Basics</h3>
+        <p>Widgets, Scaffold, Text & Buttons</p>
+    </a>
+
+    <!-- Week 2 -->
+    <a href="weeks/week2.html" class="week-box">
+        <span>Week 02</span>
+        <h3>Linux & Dart Setup</h3>
+        <p>System setup, Dart programs, and outputs</p>
+    </a>
+
+    <!-- Week 3 -->
+    <a href="weeks/week3.html" class="week-box">
+        <span>Week 03</span>
+        <h3>Forms</h3>
+        <p>TextField, Validation, Forms</p>
+    </a>
+
+    <!-- Week 4 -->
+    <a href="weeks/week4.html" class="week-box">
+        <span>Week 04</span>
+        <h3>Functions</h3>
+        <p>Defining and calling functions</p>
+    </a>
+
+    <!-- Week 5 -->
+    <a href="weeks/week5.html" class="week-box">
+        <span>Week 05</span>
+        <h3>Arrays</h3>
+        <p>Introduction to arrays and lists</p>
+    </a>
+
+    <!-- Week 6 -->
+    <a href="weeks/week6.html" class="week-box">
+        <span>Week 06</span>
+        <h3>Strings</h3>
+        <p>Manipulating text in programs</p>
+    </a>
+
+    <!-- Week 7 -->
+    <a href="weeks/week7.html" class="week-box">
+        <span>Week 07</span>
+        <h3>Structs & Objects</h3>
+        <p>Organizing data using structs</p>
+    </a>
+
+    <!-- Week 8 -->
+    <a href="weeks/week8.html" class="week-box">
+        <span>Week 08</span>
+        <h3>File Handling</h3>
+        <p>Reading and writing files</p>
+    </a>
+
+    <!-- Week 9 -->
+    <a href="weeks/week9.html" class="week-box">
+        <span>Week 09</span>
+        <h3>Pointers</h3>
+        <p>Memory management basics</p>
+    </a>
+
+    <!-- Week 10 -->
+    <a href="weeks/week10.html" class="week-box">
+        <span>Week 10</span>
+        <h3>Recursion</h3>
+        <p>Recursive functions and examples</p>
+    </a>
+</div>
+
+</main>
+
+<footer>
+    USER INTERFACE DESIGN USING FLUTTER
+</footer>
+<script>
+document.querySelectorAll('.program-card').forEach((card, index) => {
+    // Give each program-content a unique ID
+    const codeDiv = card.querySelector('.program-content');
+    if(!codeDiv.id) codeDiv.id = 'program' + (index + 1);
+
+    // Create copy button
+    const btn = document.createElement('button');
+    btn.className = 'copy-btn';
+    btn.innerText = 'Copy';
+    btn.onclick = () => {
+        const textToCopy = codeDiv.innerText || codeDiv.textContent;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert("Program copied to clipboard!");
+        }).catch(err => console.error("Copy failed", err));
+    };
+
+    // Add button at the top of the card
+    card.insertBefore(btn, card.firstChild);
+});
+</script>
+
+</body>
+</html>

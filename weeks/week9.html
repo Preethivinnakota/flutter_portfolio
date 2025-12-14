@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 9 - Flutter Lab</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="top-header">
+  <a href="../index.html" class="home-btn">
+    ← Home
+</a>
+
+    <div class="hero">
+        <h1>Week 9: Rest APIs</h1>
+        <p>Flutter Lab Programs • Code • Output Screens</p>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- Week Description -->
+    <section class="info-card">
+        <h2>Week 9: Rest APIs</h2>
+        <div class="section-divider"></div>
+        <p><strong>Description:</strong> Fetching data from public REST API using http package.</p>
+    </section>
+
+    <!-- Task 1 -->
+    <section class="question-card">
+        <h3>Task: Fetch Data from REST API</h3>
+        <pre><code>
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String message = "Loading...";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    final url = Uri.parse('https://jsonplaceholder.typicode.com/posts/1');
+
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          'User-Agent': 'Mozilla/5.0',
+          'Accept': 'application/json',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body);
+        setState(() {
+          message = "Title: ${jsonData['title']}";
+        });
+      } else {
+        setState(() {
+          message = "Error: ${response.statusCode}";
+        });
+      }
+    } catch (e) {
+      setState(() {
+        message = "Failed to load data: $e";
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('HTTP Example')),
+      body: Center(child: Text(message, textAlign: TextAlign.center)),
+    );
+  }
+}
+              </code></pre>
+    </section>
+
+    <!-- Output -->
+    <section class="output-section">
+        <h2>Output 1</h2>
+        <img src="../images/week9_output.png" alt="Week 9 Output 1" class="output-img">
+    </section>
+
+    
+<!-- Navigation Buttons -->
+<section class="week-navigation">
+    <div class="nav-buttons">
+        <!-- Previous Week Button -->
+        <button onclick="location.href='week8.html'" class="week-btn prev-btn">← Previous Week</button>
+
+        <!-- Next Week Button -->
+        <button onclick="location.href='week10.html'" class="week-btn next-btn">Next Week →</button>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    USER INTERFACE DESIGN USING FLUTTER
+</footer>
+
+</body>
+</html>

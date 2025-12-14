@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #475569;
+    min-height: 100vh;
+    background-color: #cebffc; /* lightest lavender */
+}
+
+
+/* Single subtle accent (NOT messy) */
+body::before {
+    content: "";
+    position: fixed;
+    top: -220px;
+    right: -220px;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(180,149,252,0.18), transparent 60%);
+    z-index: -1;
+}
+
+
+/* Header */
+.top-header {
+    background: linear-gradient(135deg, #667EEA, #764BA2);
+    padding: 70px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 38px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.hero p {
+    margin-top: 8px;
+    color: #E0E7FF;
+    font-size: 16px;
+}
+
+/* Layout */
+.container {
+    max-width: 1100px;
+    margin: -55px auto 70px;
+    padding: 0 20px;
+}
+
+/* Info Card */
+.info-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow:
+        0 20px 40px rgba(15, 23, 42, 0.08),
+        0 8px 16px rgba(15, 23, 42, 0.04);
+    margin-bottom: 50px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7f55e0, #a2a5e5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+}
+
+/* Details */
+.details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 40px;
+}
+
+.details strong {
+    color: #0F172A;
+}
+
+/* Weeks Section */
+.weeks-section h2 {
+    font-size: 28px;
+    color: #0F172A;
+    margin-bottom: 25px;
+}
+
+.weeks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.week-box {
+    background: #918ee8;
+    border-radius: 18px;
+    padding: 30px;
+    text-decoration: none;
+    box-shadow:
+        0 20px 40px rgba(15, 23, 42, 0.08),
+        0 8px 16px rgba(15, 23, 42, 0.04);
+    transition: all 0.3s ease;
+    color: #090909; /* default text color */
+}
+
+.week-box:hover {
+    transform: translateY(-6px);
+}
+
+/* Week card active / clicked */
+.week-box.active, .week-box:active {
+    color: #FFFFFF !important;
+}
+
+.week-box span {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.week-box h3 {
+    margin: 10px 0 6px;
+    font-size: 20px;
+    color: #0F172A;
+}
+
+.week-box p {
+    font-size: 14px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 14px;
+    color: #64748B;
+}
+
+/* Question Cards */
+.question-card {
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 25px 30px;
+    margin-bottom: 25px;
+    box-shadow:
+        0 15px 35px rgba(15, 23, 42, 0.08),
+        0 8px 16px rgba(15, 23, 42, 0.04);
+}
+
+.question-card h3 {
+    font-size: 18px;
+    color: #0F172A;
+    margin-bottom: 12px;
+}
+
+.question-card p, .question-card ul, .question-card ol {
+    font-size: 14px;
+    color: #b49dff;
+    line-height: 1.6;
+}
+
+/* Output Section */
+.output-section {
+    margin-top: 40px;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 15px;
+}
+
+.output-section h2 {
+    font-size: 20px;
+    color: #0F172A;
+    margin-bottom: 20px;
+}
+
+.output-img {
+    max-width: 700px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(15,23,42,0.08);
+}
+
+/* Overview Section */
+.overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.overview-card {
+    background: #9589ed;
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow:
+        0 15px 35px rgba(15, 23, 42, 0.08),
+        0 8px 16px rgba(15, 23, 42, 0.04);
+}
+
+.overview-card h3 {
+    font-size: 16px;
+    color: #0F172A;
+    margin-bottom: 8px;
+}
+
+.overview-card p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #141415;
+}
+
+/* About Section */
+.about-card {
+    background: #FFFFFF;
+    padding: 35px;
+    border-radius: 20px;
+    margin-bottom: 55px;
+    box-shadow:
+        0 20px 40px rgba(15, 23, 42, 0.08),
+        0 8px 16px rgba(15, 23, 42, 0.04);
+}
+
+.about-card h2 {
+    font-size: 24px;
+    color: #0F172A;
+    margin-bottom: 12px;
+}
+
+.about-card p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #475569;
+}
+
+/* Week Navigation Buttons */
+.week-navigation {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; 
+}
+
+.week-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #B497FC; /* lavender */
+    transition: background-color 0.3s ease;
+}
+
+.week-btn:hover {
+    background-color: #a77ffb; /* slightly darker lavender */
+}
+
+.prev-btn {
+    background-color: #B497FC; 
+}
+
+.prev-btn:hover {
+    background-color: #a77ffb;
+}
+
+/* Program + Output Cards */
+.card-row {
+    display: flex;
+    gap: 25px;
+    align-items: stretch;
+    margin-top: 30px;
+}
+
+.program-card,
+.output-card {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow:
+        0 15px 35px rgba(15, 23, 42, 0.08),
+        0 8px 16px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+}
+
+.program-content,
+.output-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Home Button */
+.home-btn {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .week-content {
+        grid-template-columns: 1fr;
+    }
+}
+.copy-btn {
+    margin-bottom: 10px;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #B497FC; /* lavender */
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    float: right; /* top-right position */
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: #a77ffb;
+}
